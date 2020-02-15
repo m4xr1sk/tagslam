@@ -144,13 +144,13 @@ namespace tagslam {
       const auto G = compute_G(V_tilde);
       Eigen::Matrix3d C_sum = Eigen::Matrix3d::Zero();
       M33dVec C(n);
-      for (const auto i: irange(0ul, V_tilde.size())) {
+      for (const auto i: irange(0u, V_tilde.size())) {
         const auto ImV_i = Eigen::Matrix3d::Identity() - V_tilde[i];
         C[i] = ImV_i * R_z * make_K(p_tilde.row(i));
         C_sum = C_sum + ImV_i.transpose() * C[i];
       }
       Eigen::Matrix3d FTF = Eigen::Matrix3d::Zero();
-      for (const auto i: irange(0ul, V_tilde.size())) {
+      for (const auto i: irange(0u, V_tilde.size())) {
         const auto ImV_i = Eigen::Matrix3d::Identity() - V_tilde[i];
         const auto F_i   = C[i] - ImV_i * G * C_sum;
         FTF = FTF + F_i.transpose() * F_i;

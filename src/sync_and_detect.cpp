@@ -57,7 +57,7 @@ namespace tagslam {
     nh_.param<std::string>("detector_type", detectorType_, "Mit");
     int borderWidth;
     nh_.param<int>("black_border_width", borderWidth, 1);
-    for (const auto &i: irange(0ul, imageTopics_.size())) {
+    for (const auto &i: irange(0u, imageTopics_.size())) {
       (void)i;
       if (detectorType_ == "Mit") {
         detectors_.push_back(apriltag_ros::ApriltagDetector::Create(
@@ -119,7 +119,7 @@ namespace tagslam {
                   tpv, std::bind(&SyncAndDetect::processImages,
                                  this, std::placeholders::_1,
                                  std::placeholders::_2)));
-    for (const auto &i: irange(0ul, imageTopics_.size())) {
+    for (const auto &i: irange(0u, imageTopics_.size())) {
       views_.emplace_back(new View(imageTransport_.get(),
                                    imageTopics_[i], sync_.get(),
                                    imagesAreCompressed_));
@@ -159,7 +159,7 @@ namespace tagslam {
     param[0] = cv::IMWRITE_JPEG_QUALITY;
     param[1] = 80;//default(95) 0-100
 
-    for (const auto i: irange(0ul, grey.size())) {
+    for (const auto i: irange(0u, grey.size())) {
       const std::vector<apriltag_msgs::Apriltag> tags = allTags[i];
       totTags += tags.size();
       apriltag_msgs::ApriltagArrayStamped tagMsg;
@@ -208,7 +208,7 @@ namespace tagslam {
     }
     std::vector<cv::Mat> images, grey_images;
     std::vector<std_msgs::Header> headers;
-    for (const auto i: irange(0ul, msgvec.size())) {
+    for (const auto i: irange(0u, msgvec.size())) {
       const auto &img = msgvec[i];
       cv::Mat im1 = cv_bridge::toCvCopy(
         img, sensor_msgs::image_encodings::MONO8)->image;
@@ -221,7 +221,7 @@ namespace tagslam {
       headers.push_back(img->header);
     }
     processCVMat(headers, grey_images, images);
-    for (const auto i: irange(0ul, odom.size())) {
+    for (const auto i: irange(0u, odom.size())) {
       outbag_.write<Odometry>(odometryTopics_[i],
                               odom[i]->header.stamp, odom[i]);
     }
@@ -241,7 +241,7 @@ namespace tagslam {
     }
     std::vector<cv::Mat> images, grey_images;
     std::vector<std_msgs::Header> headers;
-    for (const auto i: irange(0ul, msgvec.size())) {
+    for (const auto i: irange(0u, msgvec.size())) {
       const auto &img = msgvec[i];
       cv::Mat im = cv_bridge::toCvCopy(
         img, sensor_msgs::image_encodings::BGR8)->image;
@@ -253,7 +253,7 @@ namespace tagslam {
     }
     processCVMat(headers, grey_images, images);
         
-    for (const auto i: irange(0ul, odom.size())) {
+    for (const auto i: irange(0u, odom.size())) {
       outbag_.write<Odometry>(odometryTopics_[i],
                               odom[i]->header.stamp, odom[i]);
     }
@@ -274,7 +274,7 @@ namespace tagslam {
     allTopics.insert(allTopics.end(),odometryTopics_.begin(),
                      odometryTopics_.end());
     rosbag::View view(bag, rosbag::TopicQuery(allTopics), t_start, t_end);
-    for (const auto i: irange(0ul, tagTopics_.size())) {
+    for (const auto i: irange(0u, tagTopics_.size())) {
       ROS_INFO_STREAM("image topic: "  << imageTopics_[i]
                       << " maps to: " << tagTopics_[i]);
     }

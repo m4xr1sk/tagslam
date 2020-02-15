@@ -102,7 +102,7 @@ namespace tagslam {
       const auto &K = ci.getKVec();
       const auto &D = ci.getDVec();
       double dc[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-      for (const auto i: irange(0ul, D.size())) {
+      for (const auto i: irange(0u, D.size())) {
         dc[i] = D[i];
       }
       it = equiModelMap_.insert(
