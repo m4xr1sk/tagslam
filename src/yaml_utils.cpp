@@ -77,8 +77,8 @@ namespace tagslam {
       of << prefix << "R:" << std::endl;
       const auto R = n.convertToR();
       of << prefix << "  [ ";
-      for (const auto i: irange(0l, R.rows())) {
-        for (const auto j: irange(0l, R.cols())) {
+      for (const auto i: irange(0l, (long int)R.rows())) {
+        for (const auto j: irange(0l, (long int)R.cols())) {
           of << R(i, j);
           if (i != R.rows() - 1 || j != R.cols() - 1) {
             of << ", ";
